@@ -1,188 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valida certificados de AFP Modelo</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-
-body{
-font-family:'Open Sans',sans-serif;
-}
-
-.color-modelo-verde{
-color:#8cc63f;
-}
-
-.bg-modelo-verde{
-background-color:#8cc63f;
-}
-
+  body { font-family: 'Open Sans', sans-serif; }
+  .color-modelo-verde { color: #8cc63f; }
+  .bg-modelo-verde    { background-color: #8cc63f; }
+  .spinner {
+    width: 17px; height: 17px;
+    border: 2px solid #d4edaa;
+    border-top-color: #8cc63f;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 7px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
-
 </head>
-
 <body class="bg-[#f0f2f5] min-h-screen flex flex-col text-gray-800">
 
 <main class="flex-grow bg-white w-full">
+  <div class="max-w-2xl mx-auto px-4 py-10">
 
-<div class="max-w-2xl mx-auto px-4 py-10">
+    <h1 class="text-2xl font-light color-modelo-verde mb-6">
+      Valida certificados de AFP Modelo
+    </h1>
 
-<h1 class="text-2xl font-light color-modelo-verde mb-6">
-Valida certificados de AFP Modelo
-</h1>
+    <!-- FORMULARIO -->
+    <div id="view-form" class="flex flex-col gap-4">
+      <label class="text-sm">Folio</label>
+      <input
+        type="text"
+        id="inputFolio"
+        placeholder="Ingresa número de folio"
+        autocomplete="off"
+        class="border border-gray-200 px-4 py-2 focus:outline-none focus:border-[#8cc63f] transition-colors"
+      >
 
-<div class="flex flex-col gap-4">
+      <!-- Estado: loading / error / success inline -->
+      <div id="mensajeDiv" class="text-sm mt-1 min-h-[20px]"></div>
 
-<label class="text-sm">
-RUT asociado al certificado
-</label>
+      <!-- Vista éxito -->
+      <div id="view-success" class="hidden border border-[#8cc63f] rounded p-4 bg-[#f6fbee]">
+        <div class="flex items-center gap-2 mb-1">
+          <i class="fa-solid fa-circle-check text-[#8cc63f]"></i>
+          <span class="font-semibold text-[#5a8a1a] text-sm">El certificado es válido y está vigente.</span>
+        </div>
+        <p class="text-xs text-gray-500 mb-3 ml-6">Tiene 30 días de vigencia desde su fecha de emisión.</p>
+        <button id="btnDescargar" class="bg-modelo-verde text-white text-sm px-4 py-2 flex items-center gap-2 hover:opacity-90 transition-opacity">
+          <i class="fa-solid fa-download"></i> Ver / Descargar certificado
+        </button>
+        <a onclick="volverAValidar()" class="block mt-3 text-xs text-[#8cc63f] underline cursor-pointer hover:opacity-75">
+          Volver a validar otro certificado
+        </a>
+      </div>
 
-<input
-type="text"
-id="inputRut"
-placeholder="12.345.678-9"
-class="border border-gray-200 px-4 py-2"
->
+      <button
+        id="btnValidar"
+        disabled
+        class="bg-gray-300 text-gray-500 px-4 py-2 mt-4 font-semibold transition-all duration-200 cursor-not-allowed"
+      >
+        Validar Certificado
+      </button>
+    </div>
 
-<label class="text-sm">
-Folio
-</label>
-
-<input
-type="text"
-id="inputFolio"
-name="Folio"
-placeholder="Ingresa número de folio"
-class="border border-gray-200 px-4 py-2"
->
-
-<div
-id="mensajeDiv"
-class="text-center text-sm mt-2"
-></div>
-
-<button
-id="btnValidar"
-class="bg-gray-300 text-gray-500 px-4 py-2 mt-4"
-disabled
->
-
-Validar Certificado
-
-</button>
-
-</div>
-
-</div>
-
+  </div>
 </main>
 
 <script>
+  const WEBHOOK_URL = "https://hook.us2.make.com/bd3ho31efd4ejqp7yvtq2tbyyc397imz";
+  let documentUrl = null;
 
-const inputFolio = document.getElementById("inputFolio");
-const inputRut = document.getElementById("inputRut");
-const btnValidar = document.getElementById("btnValidar");
-const mensajeDiv = document.getElementById("mensajeDiv");
+  const inputFolio  = document.getElementById("inputFolio");
+  const btnValidar  = document.getElementById("btnValidar");
+  const mensajeDiv  = document.getElementById("mensajeDiv");
+  const viewSuccess = document.getElementById("view-success");
 
-inputFolio.addEventListener("input",()=>{
+  // ── Habilitar botón al escribir ──
+  inputFolio.addEventListener("input", () => {
+    const hasVal = inputFolio.value.trim().length > 0;
+    btnValidar.disabled = !hasVal;
+    if (hasVal) {
+      btnValidar.classList.remove("bg-gray-300","text-gray-500","cursor-not-allowed");
+      btnValidar.classList.add("bg-modelo-verde","text-white","cursor-pointer");
+    } else {
+      btnValidar.classList.add("bg-gray-300","text-gray-500","cursor-not-allowed");
+      btnValidar.classList.remove("bg-modelo-verde","text-white","cursor-pointer");
+    }
+    limpiarEstado();
+  });
 
-if(inputFolio.value.trim().length>0){
+  inputFolio.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !btnValidar.disabled) btnValidar.click();
+  });
 
-btnValidar.disabled=false;
+  // ── Click Validar ──
+  btnValidar.addEventListener("click", async () => {
+    const folio = inputFolio.value.trim();
+    if (!folio) return;
 
-btnValidar.classList.remove(
-"bg-gray-300",
-"text-gray-500"
-);
+    btnValidar.innerHTML = '<span class="spinner"></span>Validando...';
+    btnValidar.disabled  = true;
+    limpiarEstado();
 
-btnValidar.classList.add(
-"bg-[#8cc63f]",
-"text-white"
-);
+    try {
+      const respuesta = await fetch(WEBHOOK_URL, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ uuid: folio })
+      });
 
-}else{
+      const rawText = await respuesta.text().catch(() => null);
+      console.log("RAW:", rawText);
 
-btnValidar.disabled=true;
+      let datos = null;
+      try { datos = JSON.parse(rawText); } catch(e) {}
 
-btnValidar.classList.add(
-"bg-gray-300",
-"text-gray-500"
-);
+      if (!datos || rawText === "Accepted") {
+        mostrarError("Error de conexión con el servidor. Intente nuevamente. (" + (rawText || "sin respuesta") + ")");
+      } else if (datos.found === true && datos.url) {
+        documentUrl = datos.url;
+        mostrarExito();
+      } else if (datos.found === false) {
+        mostrarError("El folio ingresado no fue encontrado. Verifique el número e intente nuevamente.");
+      } else {
+        mostrarError("Respuesta inesperada: " + rawText);
+      }
 
-}
+    } catch (err) {
+      mostrarError("No se pudo conectar con el servidor. Verifique su conexión e intente nuevamente.");
+      console.error(err);
+    }
 
-});
+    btnValidar.innerHTML = "Validar Certificado";
+    btnValidar.disabled  = false;
+  });
 
-btnValidar.addEventListener("click",async()=>{
+  // ── Helpers ──
+  function limpiarEstado() {
+    mensajeDiv.innerHTML = "";
+    inputFolio.classList.remove("border-red-400","bg-red-50");
+    viewSuccess.classList.add("hidden");
+  }
 
-const folio=inputFolio.value.trim();
-const rut=inputRut.value.trim();
+  function mostrarError(texto) {
+    inputFolio.classList.add("border-red-400","bg-red-50");
+    mensajeDiv.innerHTML =
+      `<div class="flex items-center gap-2 text-red-600">
+         <i class="fa-solid fa-triangle-exclamation"></i>
+         <span>${texto}</span>
+       </div>`;
+  }
 
-if(!folio)return;
+  function mostrarExito() {
+    viewSuccess.classList.remove("hidden");
+    document.getElementById("btnDescargar").onclick = () => {
+      if (documentUrl) window.open(documentUrl, "_blank");
+    };
+  }
 
-const textoOriginal=btnValidar.innerText;
-
-btnValidar.innerText="Validando...";
-btnValidar.disabled=true;
-
-mensajeDiv.innerHTML="";
-
-try{
-
-const urlWebhook="https://hook.us2.make.com/bd3ho31efd4ejqp7yvtq2tbyyc397imz";
-
-const respuesta=await fetch(urlWebhook,{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-Folio:folio,
-rut:rut
-
-})
-
-});
-
-const datos=await respuesta.json();
-
-if(datos.found===true){
-
-mensajeDiv.innerHTML=
-'<span class="text-green-600">✔ Archivo encontrado. Abriendo documento...</span>';
-
-window.location.href=datos.url;
-
-}else{
-
-mensajeDiv.innerHTML=
-'<span class="text-red-500">✖ El folio ingresado no fue encontrado.</span>';
-
-}
-
-}catch(error){
-
-mensajeDiv.innerHTML=
-'<span class="text-red-500">⚠ Error conectando con el servidor.</span>';
-
-}
-
-btnValidar.innerText=textoOriginal;
-btnValidar.disabled=false;
-
-});
-
+  function volverAValidar() {
+    limpiarEstado();
+    inputFolio.value    = "";
+    btnValidar.disabled = true;
+    btnValidar.innerHTML = "Validar Certificado";
+    btnValidar.classList.add("bg-gray-300","text-gray-500","cursor-not-allowed");
+    btnValidar.classList.remove("bg-modelo-verde","text-white","cursor-pointer");
+    documentUrl = null;
+  }
 </script>
-
 </body>
 </html>
