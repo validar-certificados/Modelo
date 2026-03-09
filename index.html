@@ -160,7 +160,7 @@
       </div>
     </div>
 
-    <button class="btn-validar" onclick="validarCertificado()">Validar Certificado</button>
+    <button class="btn-validar" id="btn-validar">Validar Certificado</button>
 
     <div class="result" id="result-box">
       <div class="result-icon" id="result-icon"></div>
@@ -200,6 +200,14 @@
 </footer>
 
 <script>
+// Fix: asegurar que el DOM está listo
+window.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('btn-validar').addEventListener('click', validarCertificado);
+  document.getElementById('uuid-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') validarCertificado();
+  });
+});
+
 const WEBHOOK_URL = "https://hook.us2.make.com/iq6ps3txx1jaxr91mje7sx47ynbta3kb";
 
 async function validarCertificado() {
@@ -210,7 +218,7 @@ async function validarCertificado() {
   const resultSub = document.getElementById('result-sub');
   const pdfContainer = document.getElementById('pdf-viewer-container');
   const pdfFrame = document.getElementById('pdf-frame');
-  const btn = document.querySelector('.btn-validar');
+  const btn = document.getElementById('btn-validar');
 
   pdfContainer.classList.remove('visible');
   pdfFrame.src = '';
@@ -280,9 +288,7 @@ async function validarCertificado() {
   }
 }
 
-document.getElementById('uuid-input').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') validarCertificado();
-});
+
 </script>
 </body>
 </html>
