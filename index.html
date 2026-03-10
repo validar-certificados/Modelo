@@ -17,7 +17,7 @@
 
     /* ── TOP UTILS BAR (PC) ── */
     .top-utils { 
-      background: #e6f2cc; /* Color actualizado según solicitud */
+      background: #e6f2cc; 
       border-bottom: 1px solid #eee; 
       padding: 0 40px; 
       height: 40px; 
@@ -45,8 +45,6 @@
     .main-nav-tabs { display: flex; align-items: stretch; }
     .main-nav-tabs a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; padding: 0 25px; transition: background .2s; }
     .main-nav-tabs a:hover { background: #222; }
-    
-    /* Pestaña Empleadores con Celeste #8febff */
     .main-nav-tabs a.active { background: #8febff; color: #111; font-weight: 700; } 
 
     .main-nav-actions { display: flex; align-items: center; gap: 12px; margin-left: 10px; }
@@ -100,23 +98,28 @@
 
     /* ── MOBILE RESPONSIVE ── */
     @media (max-width: 900px) {
+      body { font-family: "Helvetica World", "Helvetica", "Arial", sans-serif; }
+      
       .logo-modelo-desktop { display: none; }
       .logo-modelo-mobile { display: block; width: 130px; } 
       .logo-modelo-mobile img { width: 100%; display: block; }
       
-      .top-utils { padding: 0 15px; height: 35px; justify-content: flex-start; background: #e6f2cc; }
+      .top-utils { padding: 0 15px; height: 35px; justify-content: flex-start; background: #e6f2cc; font-size: 0.92rem; } /* Aumentado 1/8 */
       
       .main-nav { background: #81be01; height: 70px; padding: 0 15px; justify-content: space-between; align-items: center; }
       .main-nav-tabs, .btn-outline, .sub-nav { display: none; }
       
       .main-nav-actions { margin: 0; gap: 10px; }
-      .btn-solid { background: transparent; border: 1px solid #fff; color: #fff; padding: 5px 10px; }
+      .btn-solid { background: transparent; border: 1px solid #fff; color: #fff; padding: 6px 12px; font-size: 0.95rem; } /* Aumentado 1/8 */
       .hamburger { display: block; background: none; border: none; cursor: pointer; padding: 0; }
       
       main { padding: 10px 5px 40px; }
-      .page-title { color: #8cc63f; font-size: 1.7rem; font-weight: 600; text-align: left; }
+      .page-title { color: #8cc63f; font-size: 1.91rem; font-weight: 600; text-align: left; } /* Aumentado 1/8 de 1.7rem */
+      .page-desc { font-size: 1.03rem; } /* Aumentado 1/8 */
       
+      /* Alerta Mobile: Color #e7f1cf, Extremo a Extremo y +1cm Alto */
       .green-alert { 
+        background: #e7f1cf; 
         width: 100vw; 
         position: relative; 
         left: 50%; 
@@ -125,13 +128,14 @@
         margin-right: -50vw; 
         border-radius: 0;
         padding: 29px 10px; 
+        font-size: 0.99rem; /* Aumentado 1/8 de 0.88rem */
       }
 
       .form-row { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px; }
-      .form-row label { text-align: left; min-width: auto; font-size: 0.95rem; }
-      .form-row input { width: 100%; padding: 10px; font-size: 1.05rem; }
+      .form-row label { text-align: left; min-width: auto; font-size: 1.06rem; } /* Aumentado 1/8 de 0.95rem */
+      .form-row input { width: 100%; padding: 10px; font-size: 1.18rem; } /* Aumentado 1/8 de 1.05rem */
       .btn-row { justify-content: center; max-width: 100%; margin-left: 0; margin-top: 20px; }
-      .btn-validar { width: 100%; padding: 12px; }
+      .btn-validar { width: 100%; padding: 12px; font-size: 1.125rem; } /* Aumentado 1/8 de 1rem */
     }
   </style>
 </head>
@@ -210,7 +214,7 @@
 <div class="footer-main">
   <div class="footer-inner">
     <div class="footer-brand"><img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo"/></div>
-    <p class="footer-legal">&copy; 2026 AFP Modelo. Todos los Derechos Reservados.</p>
+    <p class="footer-legal">&copy; 2026 AFP Modelo. Todos los Derechos Reservados. La rentabilidad es variable, por lo que nada garantiza que las rentabilidades pasadas se repitan en el futuro.</p>
   </div>
 </div>
 
@@ -220,7 +224,6 @@
 
 <script>
   const WEBHOOK = 'https://hook.us2.make.com/iq6ps3txx1jaxr91mje7sx47ynbta3kb';
-  const AFP = 'Modelo';
 
   function checkReady() {
     const btn = document.getElementById('btn-validar');
@@ -236,7 +239,7 @@
     if (!rut || !folio) return;
     const btn = document.getElementById('btn-validar');
     btn.disabled = true; 
-    const res = await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ rut, uuid: folio, afp: AFP }) });
+    const res = await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ rut, uuid: folio, afp: 'Modelo' }) });
     const data = await res.json();
     const box = document.getElementById('result-box'), hdr = document.getElementById('result-header');
     if (data.found) { hdr.innerHTML = "✅ Certificado Válido"; box.style.display = 'block'; }
