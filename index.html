@@ -12,55 +12,44 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; background: #fff; color: #333; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-    /* ── HEADER WRAPPER ── */
+    /* ── HEADER CONTAINER ── */
     .header-wrapper { position: relative; width: 100%; z-index: 100; }
 
-    /* ── LOGO COLGANTE (DESKTOP) ── */
+    /* ── LOGO COLGANTE (USANDO TU IMAGEN ORIGINAL) ── */
     .logo-modelo { 
       position: absolute; 
       top: 0; 
-      left: 60px; 
-      width: 140px; 
-      height: 110px; 
-      background: #8cc63f; 
-      border-radius: 0 0 16px 0; /* Solo la esquina inferior derecha redondeada */
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      padding-bottom: 10px; 
+      left: 60px; /* Separación desde la izquierda */
+      width: 145px; /* Tamaño idéntico al original */
       z-index: 999; 
     }
-    /* Logo forzado a blanco puro */
     .logo-modelo img { 
-      width: 80%; 
+      width: 100%; 
       height: auto; 
-      object-fit: contain; 
-      filter: brightness(0) invert(1); 
       display: block; 
+      /* Eliminados los filtros y fondos, usamos tu imagen pura */
     }
 
-    /* ── TOP UTILS BAR (Barra gris clara superior) ── */
+    /* ── TOP UTILS BAR (Barra gris) ── */
     .top-utils { background: #f9f9f9; border-bottom: 1px solid #eee; padding: 0 40px; height: 40px; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; color: #666; padding-left: 230px; }
     .top-utils .left-util { display: flex; align-items: center; gap: 6px; }
     .top-utils .chat-icon { color: #8cc63f; font-size: 1.1rem; }
-    .top-utils .right-util { border: 1px solid #8cc63f; color: #8cc63f; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
 
     /* ── MAIN NAV (Barra Negra alineada a la derecha) ── */
-    .main-nav { background: #111; height: 64px; display: flex; align-items: stretch; justify-content: flex-end; padding-right: 40px; }
+    .main-nav { background: #111; height: 60px; display: flex; align-items: stretch; justify-content: flex-end; padding-right: 40px; }
     
     .main-nav-tabs { display: flex; align-items: stretch; }
-    .main-nav-tabs a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; padding: 0 24px; transition: background .2s; }
+    .main-nav-tabs a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 400; display: flex; align-items: center; padding: 0 24px; transition: background .2s; }
     .main-nav-tabs a:hover { background: #222; }
-    .main-nav-tabs a.active { background: #00b8d4; color: #111; font-weight: 700; } /* Pestaña Cyan */
+    .main-nav-tabs a.active { background: #00b8d4; color: #111; font-weight: 600; } /* Pestaña Cyan activa */
 
     .main-nav-actions { display: flex; align-items: center; gap: 12px; margin-left: 10px; }
     
     /* Botones más cuadrados y con borde verde */
-    .btn-outline { border: 1px solid #8cc63f; color: #fff; padding: 10px 24px; border-radius: 3px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: background .2s; }
+    .btn-outline { border: 1px solid #8cc63f; color: #fff; padding: 8px 20px; border-radius: 3px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: background .2s; }
     .btn-outline:hover { background: rgba(140, 198, 63, 0.1); }
-    .btn-solid { background: #8cc63f; color: #111; padding: 10px 24px; border-radius: 3px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
-    .btn-search { background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; padding: 0 8px; }
-    .hamburger { display: none; } /* Oculto en desktop */
+    .btn-solid { background: #8cc63f; color: #111; padding: 8px 20px; border-radius: 3px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
+    .btn-search { background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; padding: 0 10px; }
 
     /* ── SUB NAV (Barra Blanca) ── */
     .sub-nav { background: #fff; border-bottom: 1px solid #eaeaea; height: 50px; display: flex; align-items: center; justify-content: center; padding-left: 230px; padding-right: 40px; gap: 30px; font-size: 0.85rem; }
@@ -76,22 +65,22 @@
     /* ── MAIN CONTENT ── */
     main { flex: 1; padding: 10px 60px 60px; max-width: 1000px; margin: 0 auto; width: 100%; }
     
-    .page-title { font-size: 2.1rem; font-weight: 600; color: #8cc63f; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .page-title span { background: transparent; color: #8cc63f; padding: 0; }
+    /* Título corregido (más grande y fuente más ligera) */
+    .page-title { font-size: 2rem; font-weight: 500; color: #8cc63f; margin-bottom: 16px; letter-spacing: -0.5px; }
     .page-desc { font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 24px; }
     
-    .green-alert { background: #f0f7ec; padding: 14px 20px; color: #333; font-size: 0.95rem; margin-bottom: 40px; border-radius: 2px; }
+    .green-alert { background: #f0f7ec; padding: 12px 20px; color: #333; font-size: 0.9rem; font-weight: 500; margin-bottom: 40px; border-radius: 2px; }
 
-    /* ── FORM DESKTOP ── */
+    /* ── FORM ── */
     .form-wrapper { max-width: 600px; margin: 0 auto; }
     .form-row { display: flex; align-items: center; margin-bottom: 20px; gap: 20px; justify-content: flex-end; }
-    .form-row label { font-size: 0.95rem; color: #555; text-align: right; min-width: 200px; }
-    .form-row input { width: 340px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 3px; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333; outline: none; transition: border-color .2s; }
+    .form-row label { font-size: 0.95rem; color: #555; text-align: right; }
+    .form-row input { width: 340px; padding: 10px 14px; border: 1px solid #ddd; border-radius: 3px; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333; outline: none; transition: border-color .2s; }
     .form-row input:focus { border-color: #8cc63f; box-shadow: 0 0 0 1px #8cc63f; }
     .form-row input::placeholder { color: #bbb; }
 
     .btn-row { display: flex; justify-content: center; margin-top: 30px; padding-left: 120px; }
-    .btn-validar { background: #f5f5f5; color: #aaa; border: 1px solid #e0e0e0; padding: 14px 40px; border-radius: 3px; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: not-allowed; transition: all .2s; }
+    .btn-validar { background: #f5f5f5; color: #aaa; border: 1px solid #e0e0e0; padding: 12px 40px; border-radius: 3px; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: not-allowed; transition: all .2s; }
     .btn-validar.ready { background: #8cc63f; color: #fff; border-color: #7ab800; cursor: pointer; }
     .btn-validar.ready:hover { background: #7ab800; }
 
@@ -121,7 +110,7 @@
     .footer-inner { max-width: 1000px; margin: 0 auto; }
     
     .footer-brand { margin-bottom: 30px; }
-    .footer-brand img { height: 40px; object-fit: contain; }
+    .footer-brand img { height: 45px; object-fit: contain; }
 
     .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
     .footer-col h4 { font-size: 0.95rem; color: #888; font-weight: 500; margin-bottom: 16px; }
@@ -132,89 +121,48 @@
     .footer-sp-bar { background: #000; color: #fff; text-align: center; padding: 14px; font-size: 0.85rem; font-weight: 500; }
     .footer-sp-bar a { color: #00b8d4; font-weight: 700; text-decoration: none; }
 
-    /* ── MOBILE RESPONSIVE EXACTO ── */
+    /* ── MOBILE RESPONSIVE ── */
     @media (max-width: 900px) {
-      /* Quitar la caja colgante, volver el logo parte de la barra */
-      .logo-modelo { position: static; width: 110px; height: auto; background: transparent; padding: 0; display: flex; align-items: center; }
-      .logo-modelo img { width: 100%; }
-      
-      .top-utils { padding: 0 20px; justify-content: space-between; }
-      
-      /* La barra negra se vuelve verde */
-      .main-nav { background: #8cc63f; height: 64px; padding: 0 20px; justify-content: space-between; align-items: center; flex-direction: row; }
-      
-      /* Ocultar elementos de desktop */
-      .main-nav-tabs { display: none; }
-      .btn-outline { display: none; }
-      .sub-nav { display: none; }
-      
-      /* Ajustar botones de la derecha */
-      .main-nav-actions { margin-left: 0; padding: 0; width: auto; gap: 15px; justify-content: flex-end; }
-      .btn-solid { background: transparent; border: 1px solid #fff; color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 0.85rem; }
-      .btn-search { margin-left: 0; }
-      
-      /* Mostrar menu hamburguesa */
-      .hamburger { display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; padding: 0; }
-
-      /* Formulario y Contenido */
-      .breadcrumb { padding: 20px; }
-      main { padding: 10px 20px 40px; }
-      
-      /* Efecto de título resaltado en verde (Mobile) */
-      .page-title { color: #fff; font-size: 1.8rem; line-height: 1.4; margin-bottom: 20px; }
-      .page-title span { background: #8cc63f; padding: 4px 8px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-      
-      .green-alert { background: #eef5e9; padding: 16px; margin-bottom: 30px; }
-
-      /* Formulario apilado */
-      .form-row { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 24px; justify-content: flex-start; }
-      .form-row label { text-align: left; width: 100%; min-width: auto; font-size: 1rem; color: #333; }
-      .form-row input { width: 100%; padding: 14px; font-size: 1.05rem; }
-      
-      .btn-row { padding-left: 0; margin-top: 20px; }
-      .btn-validar { width: 100%; padding: 16px; font-size: 1.05rem; }
-
-      /* Footer */
+      .logo-modelo { position: relative; top: 0; left: 0; width: 120px; margin: 10px auto; display: block; }
+      .top-utils { display: none; }
+      .main-nav { height: auto; flex-direction: column; padding: 0; justify-content: center; }
+      .main-nav-tabs { width: 100%; overflow-x: auto; white-space: nowrap; padding: 10px 0; justify-content: center; }
+      .main-nav-actions { width: 100%; justify-content: center; padding: 10px 0; margin-left: 0; flex-wrap: wrap; }
+      .sub-nav { overflow-x: auto; white-space: nowrap; justify-content: flex-start; padding: 15px 20px; }
+      .sub-nav .access { margin-left: 0; width: 100%; text-align: center; margin-top: 10px; }
+      .form-row { flex-direction: column; align-items: stretch; gap: 8px; }
+      .form-row label { text-align: left; min-width: auto; width: 100%; }
+      .form-row input { width: 100%; }
+      .btn-row { padding-left: 0; }
+      .btn-validar { width: 100%; }
       .contact-grid { flex-direction: column; align-items: center; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
       .footer-brand { text-align: center; }
-      .footer-brand img { margin: 0 auto; }
     }
   </style>
 </head>
 <body>
 
 <div class="header-wrapper">
+  <a href="#" class="logo-modelo">
+    <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo"/>
+  </a>
+
   <div class="top-utils">
     <div class="left-util"><span class="chat-icon">💬</span> Importante</div>
     <div class="right-util">⊕</div>
   </div>
 
   <div class="main-nav">
-    
-    <a href="#" class="logo-modelo">
-      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo"/>
-    </a>
-
     <div class="main-nav-tabs">
       <a href="#">Afiliados</a>
       <a href="#">Pensionados</a>
       <a href="#" class="active">Empleadores</a>
     </div>
-    
     <div class="main-nav-actions">
       <a href="#" class="btn-outline">Cámbiate a Modelo</a>
       <a href="#" class="btn-solid">Mi cuenta</a>
-      <button class="btn-search">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      </button>
-      <button class="hamburger">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+      <button class="btn-search">🔍</button>
     </div>
   </div>
 
@@ -232,7 +180,7 @@
 </div>
 
 <main>
-  <h1 class="page-title"><span>Valida certificados de AFP Modelo</span></h1>
+  <h1 class="page-title">Valida certificados de AFP Modelo</h1>
   <p class="page-desc">Con esta herramienta puedes validar los certificados emitidos por AFP Modelo para usarlos en trámites financieros, como gestiones con entidades públicas o privadas, y en trámites personales como acreditar antecedentes para arriendos u otros fines.</p>
   
   <div class="green-alert">Si el certificado es válido, se descargará el archivo automáticamente.</div>
@@ -257,7 +205,6 @@
         <circle cx="12" cy="12" r="10" stroke="#e0e0e0" stroke-width="3"/>
         <path d="M12 2a10 10 0 0 1 10 10" stroke="#8cc63f" stroke-width="3" stroke-linecap="round"/>
       </svg>
-      <p style="margin-top:6px;color:#888;font-size:0.85rem;">Consultando...</p>
     </div>
 
     <div class="result-box" id="result-box">
