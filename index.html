@@ -12,49 +12,48 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; background: #fff; color: #333; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-    /* ── HEADER CONTAINER ── */
+    /* ── HEADER WRAPPER ── */
     .header-wrapper { position: relative; width: 100%; z-index: 100; }
 
-    /* ── LOGO COLGANTE (USANDO TU IMAGEN ORIGINAL) ── */
-    .logo-modelo { 
+    /* ── LOGO WEB (DESKTOP) ── */
+    .logo-desktop { 
       position: absolute; 
       top: 0; 
-      left: 60px; /* Separación desde la izquierda */
-      width: 145px; /* Tamaño idéntico al original */
+      left: 60px; 
+      width: 145px; 
+      height: 110px; 
+      background: #8cc63f; 
+      border-radius: 0 0 16px 0; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 10px; 
       z-index: 999; 
     }
-    .logo-modelo img { 
-      width: 100%; 
-      height: auto; 
-      display: block; 
-      /* Eliminados los filtros y fondos, usamos tu imagen pura */
-    }
+    .logo-desktop img { width: 100%; height: auto; display: block; }
 
-    /* ── TOP UTILS BAR (Barra gris) ── */
+    /* ── LOGO MOBILE (OCULTO POR DEFECTO) ── */
+    .logo-mobile { display: none; }
+
+    /* ── TOP UTILS (WEB) ── */
     .top-utils { background: #f9f9f9; border-bottom: 1px solid #eee; padding: 0 40px; height: 40px; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; color: #666; padding-left: 230px; }
-    .top-utils .left-util { display: flex; align-items: center; gap: 6px; }
-    .top-utils .chat-icon { color: #8cc63f; font-size: 1.1rem; }
+    .top-utils .chat-icon { color: #8cc63f; font-size: 1.1rem; margin-right: 6px; }
 
-    /* ── MAIN NAV (Barra Negra alineada a la derecha) ── */
+    /* ── MAIN NAV (BLACK) ── */
     .main-nav { background: #111; height: 60px; display: flex; align-items: stretch; justify-content: flex-end; padding-right: 40px; }
-    
     .main-nav-tabs { display: flex; align-items: stretch; }
     .main-nav-tabs a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 400; display: flex; align-items: center; padding: 0 24px; transition: background .2s; }
-    .main-nav-tabs a:hover { background: #222; }
-    .main-nav-tabs a.active { background: #00b8d4; color: #111; font-weight: 600; } /* Pestaña Cyan activa */
+    .main-nav-tabs a.active { background: #00b8d4; color: #111; font-weight: 600; }
 
     .main-nav-actions { display: flex; align-items: center; gap: 12px; margin-left: 10px; }
-    
-    /* Botones más cuadrados y con borde verde */
-    .btn-outline { border: 1px solid #8cc63f; color: #fff; padding: 8px 20px; border-radius: 3px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: background .2s; }
-    .btn-outline:hover { background: rgba(140, 198, 63, 0.1); }
+    .btn-outline { border: 1px solid #8cc63f; color: #fff; padding: 8px 20px; border-radius: 3px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
     .btn-solid { background: #8cc63f; color: #111; padding: 8px 20px; border-radius: 3px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
-    .btn-search { background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; padding: 0 10px; }
+    .btn-search { background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; }
+    .hamburger { display: none; }
 
-    /* ── SUB NAV (Barra Blanca) ── */
-    .sub-nav { background: #fff; border-bottom: 1px solid #eaeaea; height: 50px; display: flex; align-items: center; justify-content: center; padding-left: 230px; padding-right: 40px; gap: 30px; font-size: 0.85rem; }
-    .sub-nav a { color: #555; text-decoration: none; font-weight: 400; display: flex; align-items: center; gap: 4px; }
-    .sub-nav a:hover { color: #8cc63f; }
+    /* ── SUB NAV (WHITE) ── */
+    .sub-nav { background: #fff; border-bottom: 1px solid #eaeaea; height: 50px; display: flex; align-items: center; padding-left: 230px; padding-right: 40px; gap: 30px; font-size: 0.85rem; }
+    .sub-nav a { color: #555; text-decoration: none; font-weight: 400; }
     .sub-nav .access { margin-left: auto; font-weight: 600; color: #333; }
 
     /* ── BREADCRUMB ── */
@@ -64,89 +63,67 @@
 
     /* ── MAIN CONTENT ── */
     main { flex: 1; padding: 10px 60px 60px; max-width: 1000px; margin: 0 auto; width: 100%; }
-    
-    /* Título corregido (más grande y fuente más ligera) */
-    .page-title { font-size: 2rem; font-weight: 500; color: #8cc63f; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .page-desc { font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 24px; }
-    
-    .green-alert { background: #f0f7ec; padding: 12px 20px; color: #333; font-size: 0.9rem; font-weight: 500; margin-bottom: 40px; border-radius: 2px; }
+    .page-title { font-size: 2.1rem; font-weight: 500; color: #8cc63f; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .green-alert { background: #f0f7ec; padding: 12px 20px; color: #333; font-size: 0.9rem; font-weight: 500; margin-bottom: 40px; }
 
     /* ── FORM ── */
     .form-wrapper { max-width: 600px; margin: 0 auto; }
     .form-row { display: flex; align-items: center; margin-bottom: 20px; gap: 20px; justify-content: flex-end; }
-    .form-row label { font-size: 0.95rem; color: #555; text-align: right; }
-    .form-row input { width: 340px; padding: 10px 14px; border: 1px solid #ddd; border-radius: 3px; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333; outline: none; transition: border-color .2s; }
-    .form-row input:focus { border-color: #8cc63f; box-shadow: 0 0 0 1px #8cc63f; }
-    .form-row input::placeholder { color: #bbb; }
+    .form-row label { font-size: 0.95rem; color: #555; text-align: right; min-width: 200px; }
+    .form-row input { width: 340px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 3px; font-size: 1rem; color: #333; outline: none; }
 
     .btn-row { display: flex; justify-content: center; margin-top: 30px; padding-left: 120px; }
-    .btn-validar { background: #f5f5f5; color: #aaa; border: 1px solid #e0e0e0; padding: 12px 40px; border-radius: 3px; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: not-allowed; transition: all .2s; }
+    .btn-validar { background: #f5f5f5; color: #aaa; border: 1px solid #e0e0e0; padding: 12px 40px; border-radius: 3px; font-weight: 600; cursor: not-allowed; transition: all .2s; }
     .btn-validar.ready { background: #8cc63f; color: #fff; border-color: #7ab800; cursor: pointer; }
-    .btn-validar.ready:hover { background: #7ab800; }
 
-    /* ── SPINNER / RESULT ── */
-    .spinner { display: none; text-align: center; padding: 20px 0; }
-    .spinner.active { display: block; }
-    .spinner svg { animation: spin .9s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
+    /* ── RESULT BOX ── */
     .result-box { display: none; margin-top: 28px; border-radius: 6px; overflow: hidden; border: 1px solid #ddd; max-width: 560px; margin-left: auto; margin-right: auto; }
     .result-box.visible { display: block; }
-    .result-header { padding: 12px 18px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
-    .result-body { padding: 18px; background: #fff; font-size: 0.9rem; }
+    .result-header { padding: 12px 18px; font-weight: 600; font-size: 0.9rem; }
+    .result-body { padding: 18px; background: #fff; }
 
     /* ── FOOTER ── */
-    .footer-top { background: #fff; border-top: 1px solid #eee; padding: 40px; text-align: center; }
-    .footer-top h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 30px; color: #333; text-align: left; max-width: 1000px; margin: 0 auto 30px; }
-    .contact-grid { display: flex; justify-content: space-between; max-width: 1000px; margin: 0 auto; align-items: flex-start; flex-wrap: wrap; gap: 30px; }
-    .contact-col { text-align: center; }
-    .contact-col h4 { font-size: 0.85rem; color: #555; font-weight: 500; margin-bottom: 12px; }
-    .contact-col p { font-size: 0.95rem; color: #333; display: flex; align-items: center; gap: 8px; justify-content: center; }
-    .social-icons { display: flex; gap: 10px; justify-content: center; }
-    .social-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 0.9rem; text-decoration: none; }
-    .app-stores { display: flex; gap: 10px; justify-content: center; }
-
-    .footer-main { background: #f9f9f9; padding: 50px 40px; border-top: 1px solid #eee; margin-top: auto; }
+    .footer-main { background: #f9f9f9; padding: 50px 60px 30px; border-top: 1px solid #eaeaea; }
     .footer-inner { max-width: 1000px; margin: 0 auto; }
-    
-    .footer-brand { margin-bottom: 30px; }
-    .footer-brand img { height: 45px; object-fit: contain; }
-
+    .footer-brand img { height: 45px; object-fit: contain; margin-bottom: 30px; }
     .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
-    .footer-col h4 { font-size: 0.95rem; color: #888; font-weight: 500; margin-bottom: 16px; }
-    .footer-col a { display: block; font-size: 0.85rem; color: #555; text-decoration: none; margin-bottom: 10px; }
-    .footer-col a:hover { color: #8cc63f; }
-    .footer-legal { font-size: 0.75rem; color: #999; line-height: 1.6; text-align: justify; margin-bottom: 20px; }
-    
-    .footer-sp-bar { background: #000; color: #fff; text-align: center; padding: 14px; font-size: 0.85rem; font-weight: 500; }
-    .footer-sp-bar a { color: #00b8d4; font-weight: 700; text-decoration: none; }
+    .footer-grid h4 { font-size: 0.95rem; color: #888; font-weight: 500; margin-bottom: 16px; }
+    .footer-grid a { display: block; font-size: 0.85rem; color: #555; text-decoration: none; margin-bottom: 10px; }
+    .footer-sp-bar { background: #000; color: #fff; text-align: center; padding: 14px; font-size: 0.85rem; }
 
     /* ── MOBILE RESPONSIVE ── */
     @media (max-width: 900px) {
-      .logo-modelo { position: relative; top: 0; left: 0; width: 120px; margin: 10px auto; display: block; }
-      .top-utils { display: none; }
-      .main-nav { height: auto; flex-direction: column; padding: 0; justify-content: center; }
-      .main-nav-tabs { width: 100%; overflow-x: auto; white-space: nowrap; padding: 10px 0; justify-content: center; }
-      .main-nav-actions { width: 100%; justify-content: center; padding: 10px 0; margin-left: 0; flex-wrap: wrap; }
-      .sub-nav { overflow-x: auto; white-space: nowrap; justify-content: flex-start; padding: 15px 20px; }
-      .sub-nav .access { margin-left: 0; width: 100%; text-align: center; margin-top: 10px; }
-      .form-row { flex-direction: column; align-items: stretch; gap: 8px; }
-      .form-row label { text-align: left; min-width: auto; width: 100%; }
-      .form-row input { width: 100%; }
+      .logo-desktop { display: none; }
+      .logo-mobile { display: flex; width: 100px; height: auto; }
+      .logo-mobile img { width: 100%; height: auto; display: block; }
+      
+      .top-utils { padding: 0 20px; justify-content: space-between; padding-left: 20px; }
+      
+      .main-nav { background: #8cc63f; height: 64px; padding: 0 20px; justify-content: space-between; align-items: center; }
+      .main-nav-tabs, .sub-nav, .btn-outline { display: none; }
+      
+      .main-nav-actions { margin-left: 0; width: auto; justify-content: flex-end; }
+      .btn-solid { background: transparent; border: 1px solid #fff; color: #fff; padding: 8px 12px; }
+      .hamburger { display: block; background: none; border: none; padding: 0; cursor: pointer; }
+
+      .page-title { color: #fff; font-size: 1.8rem; line-height: 1.4; margin-bottom: 20px; }
+      .page-title span { background: #8cc63f; padding: 4px 8px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+      .form-row { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 24px; }
+      .form-row label { text-align: left; width: 100%; min-width: auto; font-size: 1rem; }
+      .form-row input { width: 100%; padding: 14px; font-size: 1.05rem; }
       .btn-row { padding-left: 0; }
-      .btn-validar { width: 100%; }
-      .contact-grid { flex-direction: column; align-items: center; }
+      .btn-validar { width: 100%; padding: 16px; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
-      .footer-brand { text-align: center; }
     }
   </style>
 </head>
 <body>
 
 <div class="header-wrapper">
-  <a href="#" class="logo-modelo">
-    <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo"/>
-  </a>
+  <div class="logo-desktop">
+    <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo Web"/>
+  </div>
 
   <div class="top-utils">
     <div class="left-util"><span class="chat-icon">💬</span> Importante</div>
@@ -154,15 +131,23 @@
   </div>
 
   <div class="main-nav">
+    <div class="logo-mobile">
+      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO_MODELO_MOBILE.jpeg" alt="AFP Modelo Mobile"/>
+    </div>
+
     <div class="main-nav-tabs">
       <a href="#">Afiliados</a>
       <a href="#">Pensionados</a>
       <a href="#" class="active">Empleadores</a>
     </div>
+    
     <div class="main-nav-actions">
       <a href="#" class="btn-outline">Cámbiate a Modelo</a>
       <a href="#" class="btn-solid">Mi cuenta</a>
       <button class="btn-search">🔍</button>
+      <button class="hamburger">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
     </div>
   </div>
 
@@ -180,8 +165,8 @@
 </div>
 
 <main>
-  <h1 class="page-title">Valida certificados de AFP Modelo</h1>
-  <p class="page-desc">Con esta herramienta puedes validar los certificados emitidos por AFP Modelo para usarlos en trámites financieros, como gestiones con entidades públicas o privadas, y en trámites personales como acreditar antecedentes para arriendos u otros fines.</p>
+  <h1 class="page-title"><span>Valida certificados de AFP Modelo</span></h1>
+  <p class="page-desc">Con esta herramienta puedes validar los certificados emitidos por AFP Modelo para usarlos en trámites financieros, como gestiones con entidades públicas o privadas, y en trámites personales.</p>
   
   <div class="green-alert">Si el certificado es válido, se descargará el archivo automáticamente.</div>
 
@@ -190,21 +175,16 @@
       <label>RUT asociado al certificado</label>
       <input type="text" id="rut" placeholder="12.345.678-9" maxlength="12" oninput="checkReady()"/>
     </div>
-
     <div class="form-row">
       <label>Folio</label>
       <input type="text" id="folio" placeholder="Ingresa número de folio" oninput="checkReady()"/>
     </div>
-
     <div class="btn-row">
       <button class="btn-validar" id="btn-validar" onclick="validar()">Validar Certificado</button>
     </div>
 
     <div class="spinner" id="spinner">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="#e0e0e0" stroke-width="3"/>
-        <path d="M12 2a10 10 0 0 1 10 10" stroke="#8cc63f" stroke-width="3" stroke-linecap="round"/>
-      </svg>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#e0e0e0" stroke-width="3"/><path d="M12 2a10 10 0 0 1 10 10" stroke="#8cc63f" stroke-width="3" stroke-linecap="round"/></svg>
     </div>
 
     <div class="result-box" id="result-box">
@@ -214,157 +194,59 @@
   </div>
 </main>
 
-<div class="footer-top">
-  <h3>Contáctanos</h3>
-  <div class="contact-grid">
-    <div class="contact-col">
-      <h4>Nuestra central telefónica</h4>
-      <p>📞 600 828 7200 / 2 2828 7200</p>
-    </div>
-    <div class="contact-col">
-      <h4>Nuestras redes sociales</h4>
-      <div class="social-icons">
-        <a href="#" class="social-circle" style="background:#1877f2;">f</a>
-        <a href="#" class="social-circle" style="background:#000;">X</a>
-        <a href="#" class="social-circle" style="background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">IG</a>
-        <a href="#" class="social-circle" style="background:#ff0000;">▶</a>
-        <a href="#" class="social-circle" style="background:#0a66c2;">in</a>
-        <a href="#" class="social-circle" style="background:#25d366;">WA</a>
-      </div>
-    </div>
-    <div class="contact-col">
-      <h4>Descarga nuestra app móvil</h4>
-      <div class="app-stores">
-        <div style="background:#000;color:#fff;padding:6px 12px;border-radius:4px;font-size:0.7rem;display:flex;align-items:center;"> App Store</div>
-        <div style="background:#000;color:#fff;padding:6px 12px;border-radius:4px;font-size:0.7rem;display:flex;align-items:center;">▶ Google Play</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="footer-main">
   <div class="footer-inner">
-    
-    <div class="footer-brand">
-      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo"/>
-    </div>
-
+    <div class="footer-brand"><img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo Footer"/></div>
     <div class="footer-grid">
-      <div class="footer-col">
-        <h4>Sobre AFP Modelo</h4>
-        <a href="#">Código de ética y conducta</a>
-        <a href="#">Memoria Anual</a>
-        <a href="#">Estados Financieros</a>
-        <a href="#">Políticas y Estatutos</a>
-        <a href="#">Canal de Denuncia</a>
-        <a href="#">Directorio y Administración</a>
-        <a href="#">Estructura de Comisiones</a>
-      </div>
-      <div class="footer-col">
-        <h4>Estamos para ayudarte</h4>
-        <a href="#">Centro de Contacto</a>
-        <a href="#">Preguntas Frecuentes</a>
-        <a href="#">Sucursales</a>
-        <a href="#">Formulario de Contacto</a>
-        <a href="#">Mapa del Sitio</a>
-        <a href="#">Biblioteca</a>
-      </div>
-      <div class="footer-col">
-        <h4>Links de interés</h4>
-        <a href="#">PREVIRED</a>
-        <a href="#">Superintendencia de Pensiones</a>
-        <a href="#">Administradora de Fondos de Cesantía</a>
-        <a href="#">Instituto de Previsión Social</a>
-      </div>
+      <div><h4>Sobre AFP Modelo</h4><a href="#">Código de ética</a><a href="#">Memoria Anual</a></div>
+      <div><h4>Estamos para ayudarte</h4><a href="#">Centro de Contacto</a><a href="#">Sucursales</a></div>
+      <div><h4>Links de interés</h4><a href="#">PREVIRED</a><a href="#">Superintendencia</a></div>
     </div>
-    <p class="footer-legal">La rentabilidad es variable, por lo que nada garantiza que las rentabilidades pasadas se repitan en el futuro. Infórmese sobre la rentabilidad de su Fondo de Pensiones, las comisiones y la calidad de servicio de las AFP en el sitio web de la Superintendencia de Pensiones: www.spensiones.cl. Todas las transacciones y operaciones de este sitio web están sujetas a horario de Chile Continental. <br><br> &copy; 2026 AFP Modelo. Todos los Derechos Reservados.</p>
+    <p class="footer-legal">&copy; 2026 AFP Modelo. Todos los Derechos Reservados. La rentabilidad es variable, por lo que nada garantiza que las rentabilidades pasadas se repitan en el futuro.</p>
   </div>
 </div>
 
-<div class="footer-sp-bar">
-  Entrega tu opinión a la <a href="#">SUPERINTENDENCIA DE PENSIONES</a> sobre la calidad de servicio de tu AFP.
-</div>
+<div class="footer-sp-bar">Entrega tu opinión a la <a href="#">SUPERINTENDENCIA DE PENSIONES</a>.</div>
 
 <script>
   const WEBHOOK = 'https://hook.us2.make.com/iq6ps3txx1jaxr91mje7sx47ynbta3kb';
-  const AFP = 'Modelo';
 
   function checkReady() {
     const btn = document.getElementById('btn-validar');
-    const rut = document.getElementById('rut').value.trim();
-    const folio = document.getElementById('folio').value.trim();
-    if (rut && folio) { btn.classList.add('ready'); btn.disabled = false; }
+    if (document.getElementById('rut').value.trim() && document.getElementById('folio').value.trim()) { btn.classList.add('ready'); btn.disabled = false; }
     else { btn.classList.remove('ready'); btn.disabled = true; }
   }
 
   function abrirPDF(b64) {
-    let base64 = b64.startsWith('data:') ? b64.split(',')[1] : b64;
-    const binary = atob(base64); const array = new Uint8Array(binary.length);
-    for(let i=0; i<binary.length; i++) array[i] = binary.charCodeAt(i);
-    const blob = new Blob([array], {type: 'application/pdf'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = 'Certificado_Modelo.pdf';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    let b=atob(b64), a=new Uint8Array(b.length);
+    for(let i=0;i<b.length;i++) a[i]=b.charCodeAt(i);
+    const url = URL.createObjectURL(new Blob([a],{type:'application/pdf'}));
+    const link = document.createElement('a'); link.href = url; link.download = 'Certificado_Modelo.pdf'; link.click();
   }
 
   async function validar() {
-    const rut = document.getElementById('rut').value.trim(); 
+    const rut = document.getElementById('rut').value.trim();
     const folio = document.getElementById('folio').value.trim();
     if (!rut || !folio) return;
-    
-    document.getElementById('btn-validar').disabled = true; 
-    document.getElementById('btn-validar').classList.remove('ready');
-    document.getElementById('spinner').classList.add('active'); 
+    document.getElementById('btn-validar').disabled = true;
+    document.getElementById('spinner').classList.add('active');
     document.getElementById('result-box').classList.remove('visible');
-    
-    const controller = new AbortController(); 
-    const timeout = setTimeout(() => controller.abort(), 30000);
-
     try {
-      const res = await fetch(WEBHOOK, { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json' }, 
-        body: JSON.stringify({ rut: rut, uuid: folio, afp: AFP }), 
-        signal: controller.signal 
-      });
-      clearTimeout(timeout); 
+      const res = await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ rut, uuid: folio, afp: 'Modelo' }) });
       const data = await res.json();
-      
       document.getElementById('spinner').classList.remove('active');
       const box = document.getElementById('result-box'), hdr = document.getElementById('result-header'), bdy = document.getElementById('result-body');
-      
       if (data.found === true && data.pdf) {
-        hdr.className = 'result-header success';
-        hdr.style.cssText = 'background:#f0fbec; color:#4a7c20; border-bottom:2px solid #8cc63f;'; 
-        hdr.innerHTML = `✅ Certificado válido y verificado`;
-        bdy.innerHTML = `<div style="text-align:center; padding: 10px 0;"><h3 style="color:#333;margin-bottom:10px;">${data.name || 'Certificado AFP Modelo'}</h3><p style="color:#555;margin-bottom:20px;">El documento se ha descargado automáticamente en tu dispositivo.</p><button onclick="abrirPDF('${data.pdf}')" style="background:#8cc63f; color:#fff; border:none; padding:10px 20px; border-radius:4px; cursor:pointer; font-weight:bold;">⬇ Volver a descargar</button></div>`;
+        hdr.style.cssText = 'background:#f0fbec; color:#4a7c20; border-bottom:2px solid #8cc63f;'; hdr.innerHTML = `✅ Certificado válido`;
+        bdy.innerHTML = `<div style="text-align:center;"><p style="margin-bottom:15px;">Documento verificado con éxito.</p><button onclick="abrirPDF('${data.pdf}')" style="background:#8cc63f; color:#fff; border:none; padding:10px 20px; border-radius:4px; cursor:pointer; font-weight:bold;">⬇ Descargar PDF</button></div>`;
         abrirPDF(data.pdf);
-      } else if (data.found === false) {
-        hdr.className = 'result-header error';
-        hdr.style.cssText = 'background:#fff5f5; color:#c62828; border-bottom:2px solid #c62828;'; 
-        hdr.innerHTML = `❌ Certificado no encontrado`;
-        bdy.innerHTML = `<p style="color:#555;">No se encontró ningún certificado con los datos ingresados.</p>`;
       } else {
-        hdr.className = 'result-header error';
-        hdr.style.cssText = 'background:#fff5f5; color:#c62828; border-bottom:2px solid #c62828;'; 
-        hdr.innerHTML = `⚠️ Error del servidor`;
-        bdy.innerHTML = `<p style="color:#555;">Inténtalo de nuevo más tarde.</p>`;
+        hdr.style.cssText = 'background:#fff5f5; color:#c62828; border-bottom:2px solid #c62828;'; hdr.innerHTML = `❌ No encontrado`;
+        bdy.innerHTML = `<p>No se encontró el certificado.</p>`;
       }
       box.classList.add('visible');
-    } catch(err) {
-      clearTimeout(timeout); document.getElementById('spinner').classList.remove('active');
-      const box = document.getElementById('result-box'), hdr = document.getElementById('result-header');
-      hdr.className = 'result-header error';
-      hdr.style.cssText = 'background:#fff5f5; color:#c62828; border-bottom:2px solid #c62828;'; 
-      hdr.innerHTML = '⚠️ Error de conexión.';
-      document.getElementById('result-body').innerHTML = '<p>Verifica tu red.</p>';
-      box.classList.add('visible');
-    } finally { checkReady(); }
+    } catch(e) { document.getElementById('spinner').classList.remove('active'); }
   }
-
-  document.getElementById('rut').addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('folio').focus(); });
-  document.getElementById('folio').addEventListener('keydown', e => { if(e.key === 'Enter') validar(); });
-  document.getElementById('btn-validar').disabled = true;
 </script>
 </body>
 </html>
