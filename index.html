@@ -7,133 +7,136 @@
   
   <link rel="icon" href="https://www.google.com/s2/favicons?domain=afpmodelo.cl&sz=128" type="image/png" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
+    /* FUENTE CORPORATIVA GROTESK S SH BOOK */
+    @font-face {
+      font-family: 'Grotesk S SH Book';
+      src: local('Grotesk S SH Book'), local('Grotesk-S-SH-Book');
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: #fff; color: #333; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    body { font-family: 'Grotesk S SH Book', 'Inter', sans-serif; background: #fff; color: #333; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
     /* ── HEADER WRAPPER ── */
     .header-wrapper { position: relative; width: 100%; z-index: 100; }
 
-    /* ── LOGO (PC) ── */
+    /* ── TOP UTILS BAR (PC) ── */
+    .top-utils { background: #f9f9f9; border-bottom: 1px solid #eee; padding: 0 40px; height: 40px; display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: #666; }
+    .top-utils .left-util { display: flex; align-items: center; gap: 6px; }
+    .top-utils .chat-icon { color: #8cc63f; font-size: 1rem; }
+
+    /* ── MAIN NAV (PC) ── */
+    .main-nav { background: #111; height: 72px; display: flex; align-items: stretch; padding: 0 40px; }
+    
     .logo-modelo-desktop { 
-      position: absolute; 
-      top: 0; 
-      left: 60px; 
+      display: flex; 
+      align-items: center; 
       width: 145px; 
-      z-index: 1000; 
+      margin-right: auto;
     }
     .logo-modelo-desktop img { width: 100%; height: auto; display: block; }
     .logo-modelo-mobile { display: none; }
 
-    /* ── TOP UTILS BAR (PC) ── */
-    .top-utils { background: #f9f9f9; border-bottom: 1px solid #eee; padding: 0 40px; height: 40px; display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: #666; padding-left: 240px; }
-    .top-utils .left-util { display: flex; align-items: center; gap: 6px; }
-    .top-utils .chat-icon { color: #8cc63f; font-size: 1rem; }
-
-    /* ── MAIN NAV (Barra Negra 1/8 más alta) ── */
-    .main-nav { background: #111; height: 72px; display: flex; align-items: stretch; justify-content: flex-end; padding-right: 40px; }
-    
     .main-nav-tabs { display: flex; align-items: stretch; }
     .main-nav-tabs a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; padding: 0 25px; transition: background .2s; }
-    .main-nav-tabs a:hover { background: #222; }
-    
-    /* Pestaña Empleadores con Cian Brillante */
     .main-nav-tabs a.active { background: #00e5ff; color: #111; font-weight: 700; } 
 
     .main-nav-actions { display: flex; align-items: center; gap: 12px; margin-left: 10px; }
     .btn-outline { border: 1px solid #8cc63f; color: #fff; padding: 7px 18px; border-radius: 3px; font-size: 0.82rem; font-weight: 600; text-decoration: none; }
-    
-    /* Botón Mi Cuenta con letras blancas */
     .btn-solid { background: #8cc63f; color: #fff; padding: 7px 18px; border-radius: 3px; font-size: 0.82rem; font-weight: 600; text-decoration: none; }
-    
     .btn-search { background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; padding: 0 8px; }
     .hamburger { display: none; }
 
     /* ── SUB NAV ── */
-    .sub-nav { background: #fff; border-bottom: 1px solid #eaeaea; height: 48px; display: flex; align-items: center; padding-left: 240px; padding-right: 40px; gap: 25px; font-size: 0.82rem; }
+    .sub-nav { background: #fff; border-bottom: 1px solid #eaeaea; height: 48px; display: flex; align-items: center; padding: 0 40px; gap: 25px; font-size: 0.82rem; }
     .sub-nav a { color: #555; text-decoration: none; font-weight: 500; }
 
     /* ── BREADCRUMB ── */
     .breadcrumb { padding: 30px 40px 10px; max-width: 1000px; margin: 0 auto; width: 100%; font-size: 0.8rem; color: #999; }
-    .breadcrumb a { color: #999; text-decoration: none; }
     .breadcrumb .current { color: #8cc63f; }
 
     /* ── MAIN CONTENT ── */
     main { flex: 1; padding: 10px 40px 60px; max-width: 1000px; margin: 0 auto; width: 100%; }
-    .page-title { font-size: 2rem; font-weight: 500; color: #8cc63f; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .page-desc { font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 24px; }
+    .page-title { font-size: 2.1rem; font-weight: 500; color: #8cc63f; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .page-desc { font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 24px; }
     
-    .green-alert { background: #f4f9f1; padding: 10px 20px; color: #333; font-size: 0.88rem; font-weight: 500; margin-bottom: 40px; border-radius: 2px; }
-
-    /* ── FORM (Centrado en Web) ── */
+    /* ── FORM (PC) ── */
     .form-wrapper { max-width: 600px; margin: 0 auto; }
     .form-row { display: flex; align-items: center; margin-bottom: 18px; gap: 20px; justify-content: center; } 
-    .form-row label { font-size: 0.9rem; color: #555; text-align: right; min-width: 200px; }
-    
+    .form-row label { font-size: 0.92rem; color: #555; text-align: right; min-width: 200px; }
     .form-row input { 
       width: 321px; 
       padding: 5.5px 12px; 
       border: 1px solid #ddd; 
       border-radius: 3px; 
-      font-family: 'Inter', sans-serif; 
-      font-size: 0.95rem; 
+      font-size: 0.98rem; 
       color: #333; 
       outline: none; 
     }
-    .form-row input:focus { border-color: #8cc63f; }
-
-    /* Botón: 2cm abajo (75px) y 4.5px de padding (1/8cm menos) */
-    .btn-row { display: flex; justify-content: flex-end; margin-top: 75px; max-width: 541px; margin-left: auto; } 
-    .btn-validar { background: #f2f2f2; color: #aaa; border: 1px solid #e0e0e0; padding: 4.5px 30px; border-radius: 3px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: not-allowed; transition: all .2s; }
-    .btn-validar.ready { background: #8cc63f; color: #fff; border-color: #7ab800; cursor: pointer; }
-
-    /* ── SPINNER / RESULT ── */
-    .spinner { display: none; text-align: center; padding: 20px 0; }
-    .spinner.active { display: block; }
-    .spinner svg { animation: spin .9s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .result-box { display: none; margin-top: 28px; border-radius: 6px; overflow: hidden; border: 1px solid #ddd; max-width: 560px; margin-left: auto; margin-right: auto; }
-    .result-box.visible { display: block; }
-    .result-header { padding: 12px 18px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
-    .result-body { padding: 18px; background: #fff; font-size: 0.9rem; }
-
-    /* ── FOOTER ── */
-    .footer-main { background: #f9f9f9; padding: 50px 40px; border-top: 1px solid #eee; margin-top: auto; }
-    .footer-inner { max-width: 1000px; margin: 0 auto; }
-    .footer-brand img { height: 40px; object-fit: contain; margin-bottom: 30px; }
-    .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
-    .footer-col h4 { font-size: 0.9rem; color: #888; font-weight: 600; margin-bottom: 16px; }
-    .footer-col a { display: block; font-size: 0.82rem; color: #555; text-decoration: none; margin-bottom: 10px; }
-    .footer-legal { font-size: 0.72rem; color: #999; line-height: 1.6; }
     
-    .footer-sp-bar { background: #000; color: #fff; text-align: center; padding: 14px; font-size: 0.82rem; }
-    .footer-sp-bar a { color: #00b8d4; font-weight: 700; text-decoration: none; }
+    .green-alert { background: #f4f9f1; padding: 10px 20px; color: #333; font-size: 0.9rem; font-weight: 500; margin-bottom: 40px; border-radius: 2px; text-align: center; }
+
+    /* Botón Validar PC */
+    .btn-row { display: flex; justify-content: flex-end; margin-top: 75px; max-width: 541px; margin-left: auto; } 
+    .btn-validar { background: #f2f2f2; color: #aaa; border: 1px solid #e0e0e0; padding: 4.5px 30px; border-radius: 3px; font-weight: 600; cursor: not-allowed; transition: all .2s; }
+    .btn-validar.ready { background: #8cc63f; color: #fff; border-color: #7ab800; cursor: pointer; }
 
     /* ── MOBILE RESPONSIVE ── */
     @media (max-width: 900px) {
       .logo-modelo-desktop { display: none; }
-      .logo-modelo-mobile { 
-        display: block; 
-        width: 130px; /* Reducido 1/4 cm (aprox 10px) */
-      }
+      .logo-modelo-mobile { display: block; width: 125px; } 
       .logo-modelo-mobile img { width: 100%; display: block; }
       
-      .top-utils { padding: 0 15px; height: 35px; justify-content: flex-start; }
-      .main-nav { background: #8cc63f; height: 60px; padding: 0 15px; justify-content: space-between; align-items: center; }
+      .top-utils { padding: 0 5px; height: 35px; justify-content: flex-start; border-bottom: none; }
+      
+      /* Barra Móvil: Color #8ebb3a y altura 70px */
+      .main-nav { background: #8ebb3a; height: 70px; padding: 0 5px; justify-content: space-between; align-items: center; }
       .main-nav-tabs, .btn-outline, .sub-nav { display: none; }
       
-      .main-nav-actions { margin: 0; gap: 10px; }
-      .btn-solid { background: transparent; border: 1px solid #fff; color: #fff; padding: 6px 12px; }
-      .hamburger { display: block; background: none; border: none; cursor: pointer; padding: 0; }
+      .main-nav-actions { margin: 0; gap: 8px; }
+      .btn-solid { background: transparent; border: 1px solid #fff; color: #fff; padding: 5px 10px; }
+      .hamburger { display: block; background: none; border: none; cursor: pointer; }
       
-      .page-title { color: #8cc63f; font-size: 1.7rem; font-weight: 600; text-align: left; }
+      main { padding: 10px 5px 40px; }
       
-      .form-row { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px; justify-content: flex-start; }
-      .form-row label { text-align: left; min-width: auto; font-size: 0.95rem; }
+      /* Título Mobile: Justificado, alineado a la izquierda y reducido 1/8 */
+      .page-title { 
+        color: #8cc63f; 
+        font-size: 1.86rem; /* Reducido 1/8 del anterior */
+        font-weight: 600; 
+        text-align: justify; 
+        text-align-last: left; 
+        margin-bottom: 20px; 
+      }
+      
+      /* Párrafo Mobile: Justificado, alineado a la izquierda y reducido 1/8 */
+      .page-desc { 
+        font-size: 1.04rem; /* Reducido 1/8 del anterior */
+        text-align: justify; 
+        text-align-last: left; 
+        line-height: 1.5; 
+      }
+
+      /* Breadcrumb Móvil en Verde */
+      .breadcrumb, .breadcrumb a, .breadcrumb .current { color: #8cc63f !important; }
+      .breadcrumb { padding: 20px 5px 10px; }
+
+      /* Alerta Móvil Extremo a Extremo */
+      .green-alert { 
+        width: 100vw; 
+        position: relative; 
+        left: 50%; 
+        right: 50%; 
+        margin-left: -50vw; 
+        margin-right: -50vw; 
+        border-radius: 0;
+        padding: 29px 5px; 
+        text-align: center;
+      }
+
+      .form-row { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px; }
+      .form-row label { text-align: left; min-width: auto; font-size: 1rem; }
       .form-row input { width: 100%; padding: 10px; font-size: 1.05rem; }
-      
       .btn-row { justify-content: center; max-width: 100%; margin-left: 0; margin-top: 20px; }
       .btn-validar { width: 100%; padding: 12px; }
     }
@@ -148,11 +151,11 @@
 
   <div class="main-nav">
     <a href="#" class="logo-modelo-desktop">
-      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo PC"/>
+      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="PC"/>
     </a>
 
     <a href="#" class="logo-modelo-mobile">
-      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO_MODELO_MOBILE.jpeg" alt="AFP Modelo Celular"/>
+      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO_MODELO_MOBILE.jpeg" alt="Mobile"/>
     </a>
 
     <div class="main-nav-tabs">
@@ -164,12 +167,8 @@
     <div class="main-nav-actions">
       <a href="#" class="btn-outline">Cámbiate a Modelo</a>
       <a href="#" class="btn-solid">Mi cuenta</a>
-      <button class="btn-search">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      </button>
-      <button class="hamburger">
-        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-      </button>
+      <button class="btn-search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+      <button class="hamburger"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
     </div>
   </div>
 
@@ -197,66 +196,30 @@
       <label>RUT asociado al certificado</label>
       <input type="text" id="rut" placeholder="12.345.678-9" maxlength="12" oninput="checkReady()"/>
     </div>
-
     <div class="form-row">
       <label>Folio</label>
       <input type="text" id="folio" placeholder="Ingresa número de folio" oninput="checkReady()"/>
     </div>
-
     <div class="btn-row">
       <button class="btn-validar" id="btn-validar" onclick="validar()">Validar Certificado</button>
     </div>
+  </div>
 
-    <div class="spinner" id="spinner">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="#e0e0e0" stroke-width="3"/>
-        <path d="M12 2a10 10 0 0 1 10 10" stroke="#8cc63f" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </div>
-
-    <div class="result-box" id="result-box">
-      <div class="result-header" id="result-header"></div>
-      <div class="result-body" id="result-body"></div>
-    </div>
+  <div id="result-box" style="display:none; margin-top:20px; border:1px solid #ddd; border-radius:6px;">
+    <div id="result-header" style="padding:15px; font-weight:bold; border-bottom:1px solid #eee;"></div>
+    <div id="result-body" style="padding:15px; background:#fff;"></div>
   </div>
 </main>
 
 <div class="footer-main">
   <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo"/>
-    </div>
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>Sobre AFP Modelo</h4>
-        <a href="#">Memoria Anual</a>
-        <a href="#">Estados Financieros</a>
-        <a href="#">Canal de Denuncia</a>
-      </div>
-      <div class="footer-col">
-        <h4>Estamos para ayudarte</h4>
-        <a href="#">Centro de Contacto</a>
-        <a href="#">Sucursales</a>
-        <a href="#">Preguntas Frecuentes</a>
-      </div>
-      <div class="footer-col">
-        <h4>Links de interés</h4>
-        <a href="#">PREVIRED</a>
-        <a href="#">Superintendencia de Pensiones</a>
-        <a href="#">Instituto de Previsión Social</a>
-      </div>
-    </div>
+    <div class="footer-brand"><img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo" style="height:40px;"/></div>
     <p class="footer-legal">&copy; 2026 AFP Modelo. Todos los Derechos Reservados. La rentabilidad es variable, por lo que nada garantiza que las rentabilidades pasadas se repitan en el futuro.</p>
   </div>
 </div>
 
-<div class="footer-sp-bar">
-  Entrega tu opinión a la <a href="#">SUPERINTENDENCIA DE PENSIONES</a> sobre la calidad de servicio de tu AFP.
-</div>
-
 <script>
   const WEBHOOK = 'https://hook.us2.make.com/iq6ps3txx1jaxr91mje7sx47ynbta3kb';
-  const AFP = 'Modelo';
 
   function checkReady() {
     const btn = document.getElementById('btn-validar');
@@ -266,64 +229,21 @@
     else { btn.classList.remove('ready'); btn.disabled = true; }
   }
 
-  function abrirPDF(b64) {
-    let base64 = b64.startsWith('data:') ? b64.split(',')[1] : b64;
-    const binary = atob(base64); const array = new Uint8Array(binary.length);
-    for(let i=0; i<binary.length; i++) array[i] = binary.charCodeAt(i);
-    const url = URL.createObjectURL(new Blob([array], {type: 'application/pdf'}));
-    const a = document.createElement('a'); a.href = url; a.download = 'Certificado_Modelo.pdf';
-    a.click();
-    window.open(url, '_blank');
-  }
-
   async function validar() {
     const rut = document.getElementById('rut').value.trim(); 
     const folio = document.getElementById('folio').value.trim();
     if (!rut || !folio) return;
-    
-    document.getElementById('btn-validar').disabled = true; 
-    document.getElementById('btn-validar').classList.remove('ready');
-    document.getElementById('spinner').classList.add('active'); 
-    document.getElementById('result-box').classList.remove('visible');
-    
-    const controller = new AbortController(); 
-    const timeout = setTimeout(() => controller.abort(), 30000);
-
+    const btn = document.getElementById('btn-validar');
+    btn.disabled = true; 
     try {
-      const res = await fetch(WEBHOOK, { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json' }, 
-        body: JSON.stringify({ rut, uuid: folio, afp: AFP }), 
-        signal: controller.signal 
-      });
-      clearTimeout(timeout); 
+      const res = await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ rut, uuid: folio, afp: 'Modelo' }) });
       const data = await res.json();
-      
-      document.getElementById('spinner').classList.remove('active');
-      const box = document.getElementById('result-box'), hdr = document.getElementById('result-header'), bdy = document.getElementById('result-body');
-      
-      if (data.found === true && data.pdf) {
-        hdr.style.cssText = 'background:#f0fbec; color:#4a7c20; border-bottom:2px solid #8cc63f;'; 
-        hdr.innerHTML = `✅ Certificado válido y verificado`;
-        bdy.innerHTML = `<div style="text-align:center; padding: 10px 0;"><h3 style="color:#333;">${data.name || 'Certificado AFP Modelo'}</h3><p>Descarga automática iniciada.</p></div>`;
-        abrirPDF(data.pdf);
-      } else {
-        hdr.style.cssText = 'background:#fff5f5; color:#c62828; border-bottom:2px solid #c62828;'; 
-        hdr.innerHTML = `❌ Certificado no encontrado`;
-        bdy.innerHTML = `<p style="color:#555;">No se encontró ningún certificado con los datos ingresados.</p>`;
-      }
-      box.classList.add('visible');
-    } catch(err) {
-      clearTimeout(timeout); document.getElementById('spinner').classList.remove('active');
       const box = document.getElementById('result-box'), hdr = document.getElementById('result-header');
-      hdr.style.cssText = 'background:#fff5f5; color:#c62828; border-bottom:2px solid #c62828;'; 
-      hdr.innerHTML = '⚠️ Error de conexión.';
-      box.classList.add('visible');
-    } finally { checkReady(); }
+      if (data.found) { hdr.innerHTML = "✅ Certificado Válido"; box.style.display = 'block'; }
+      else { hdr.innerHTML = "❌ No Encontrado"; box.style.display = 'block'; }
+    } catch(e) { console.error(e); }
+    btn.disabled = false;
   }
-
-  document.getElementById('rut').addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('folio').focus(); });
-  document.getElementById('folio').addEventListener('keydown', e => { if(e.key === 'Enter') validar(); });
 </script>
 </body>
 </html>
