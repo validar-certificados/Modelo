@@ -7,10 +7,13 @@
   
   <link rel="icon" href="https://www.google.com/s2/favicons?domain=afpmodelo.cl&sz=128" type="image/png" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  
   <style>
-    /* Aplicación de fuente Grotesk S SH Book con fallback a Inter */
+    /* FUENTE CORPORATIVA GROTESK S SH BOOK */
+    @font-face {
+      font-family: 'Grotesk S SH Book';
+      src: local('Grotesk S SH Book'), local('Grotesk-S-SH-Book');
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Grotesk S SH Book', 'Inter', sans-serif; background: #fff; color: #333; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
@@ -22,15 +25,10 @@
     .top-utils .left-util { display: flex; align-items: center; gap: 6px; }
     .top-utils .chat-icon { color: #8cc63f; font-size: 1rem; }
 
-    /* ── MAIN NAV (Barra Negra con Logo Integrado) ── */
+    /* ── MAIN NAV (PC) ── */
     .main-nav { background: #111; height: 72px; display: flex; align-items: stretch; padding: 0 40px; }
     
-    .logo-modelo-desktop { 
-      display: flex; 
-      align-items: center; 
-      width: 145px; 
-      margin-right: auto;
-    }
+    .logo-modelo-desktop { display: flex; align-items: center; width: 145px; margin-right: auto; }
     .logo-modelo-desktop img { width: 100%; height: auto; display: block; }
     .logo-modelo-mobile { display: none; }
 
@@ -47,7 +45,6 @@
     /* ── SUB NAV ── */
     .sub-nav { background: #fff; border-bottom: 1px solid #eaeaea; height: 48px; display: flex; align-items: center; padding: 0 40px; gap: 25px; font-size: 0.82rem; }
     .sub-nav a { color: #555; text-decoration: none; font-weight: 500; }
-    .sub-nav .access { margin-left: auto; font-weight: 700; color: #333; }
 
     /* ── BREADCRUMB ── */
     .breadcrumb { padding: 30px 40px 10px; max-width: 1000px; margin: 0 auto; width: 100%; font-size: 0.8rem; color: #999; }
@@ -55,26 +52,26 @@
 
     /* ── MAIN CONTENT ── */
     main { flex: 1; padding: 10px 40px 60px; max-width: 1000px; margin: 0 auto; width: 100%; }
-    .page-title { font-size: 2rem; font-weight: 500; color: #8cc63f; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .page-desc { font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 24px; }
+    .page-title { font-size: 2.1rem; font-weight: 500; color: #8cc63f; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .page-desc { font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 24px; }
     
-    /* ── FORM (Centrado en Web) ── */
+    /* ── FORM (PC) ── */
     .form-wrapper { max-width: 600px; margin: 0 auto; }
     .form-row { display: flex; align-items: center; margin-bottom: 18px; gap: 20px; justify-content: center; } 
-    .form-row label { font-size: 0.9rem; color: #555; text-align: right; min-width: 200px; }
+    .form-row label { font-size: 0.92rem; color: #555; text-align: right; min-width: 200px; }
     .form-row input { 
       width: 321px; 
       padding: 5.5px 12px; 
       border: 1px solid #ddd; 
       border-radius: 3px; 
-      font-size: 0.95rem; 
+      font-size: 0.98rem; 
       color: #333; 
       outline: none; 
     }
     
-    .green-alert { background: #f4f9f1; padding: 10px 20px; color: #333; font-size: 0.88rem; font-weight: 500; margin-bottom: 40px; border-radius: 2px; text-align: center; }
+    .green-alert { background: #f4f9f1; padding: 10px 20px; color: #333; font-size: 0.9rem; font-weight: 500; margin-bottom: 40px; border-radius: 2px; text-align: center; }
 
-    /* Botón: 2cm abajo y altura reducida */
+    /* Botón Validar PC */
     .btn-row { display: flex; justify-content: flex-end; margin-top: 75px; max-width: 541px; margin-left: auto; } 
     .btn-validar { background: #f2f2f2; color: #aaa; border: 1px solid #e0e0e0; padding: 4.5px 30px; border-radius: 3px; font-weight: 600; cursor: not-allowed; transition: all .2s; }
     .btn-validar.ready { background: #8cc63f; color: #fff; border-color: #7ab800; cursor: pointer; }
@@ -82,14 +79,13 @@
     /* ── MOBILE RESPONSIVE ── */
     @media (max-width: 900px) {
       .logo-modelo-desktop { display: none; }
-      .logo-modelo-mobile { 
-        display: block; 
-        width: 105px; /* Reducido 2/8 (25%) del original */
-      } 
+      .logo-modelo-mobile { display: block; width: 125px; } 
       .logo-modelo-mobile img { width: 100%; display: block; }
       
       .top-utils { padding: 0 5px; height: 35px; justify-content: flex-start; border-bottom: none; }
-      .main-nav { background: #8cc63f; height: 60px; padding: 0 5px; justify-content: space-between; align-items: center; }
+      
+      /* Barra verde Mobile: +1/4 cm alto (70px) */
+      .main-nav { background: #8cc63f; height: 70px; padding: 0 5px; justify-content: space-between; align-items: center; }
       .main-nav-tabs, .btn-outline, .sub-nav { display: none; }
       
       .main-nav-actions { margin: 0; gap: 8px; }
@@ -97,9 +93,18 @@
       .hamburger { display: block; background: none; border: none; cursor: pointer; }
       
       main { padding: 10px 5px 40px; }
-      .page-title { color: #8cc63f; font-size: 1.7rem; text-align: left; }
       
-      /* Alerta Extremo a Extremo */
+      /* Título Mobile: Centrado, Justificado y +25% Tamaño */
+      .page-title { color: #8cc63f; font-size: 2.125rem; font-weight: 600; text-align: center; text-align-last: center; margin-bottom: 20px; }
+      
+      /* Párrafo Mobile: Justificado, Centrado y +25% Tamaño */
+      .page-desc { font-size: 1.18rem; text-align: justify; text-align-last: center; line-height: 1.5; }
+
+      /* Breadcrumb Móvil en Verde */
+      .breadcrumb, .breadcrumb a, .breadcrumb .current { color: #8cc63f !important; }
+      .breadcrumb { padding: 20px 5px 10px; }
+
+      /* Alerta Móvil Extremo a Extremo */
       .green-alert { 
         width: 100vw; 
         position: relative; 
@@ -108,13 +113,15 @@
         margin-left: -50vw; 
         margin-right: -50vw; 
         border-radius: 0;
-        padding: 29px 10px; 
+        padding: 29px 5px; 
+        font-size: 0.9rem;
       }
 
       .form-row { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px; }
-      .form-row label { text-align: left; min-width: auto; }
-      .form-row input { width: 100%; padding: 10px; }
+      .form-row label { text-align: left; min-width: auto; font-size: 1rem; }
+      .form-row input { width: 100%; padding: 10px; font-size: 1.05rem; }
       .btn-row { justify-content: center; max-width: 100%; margin-left: 0; margin-top: 20px; }
+      .btn-validar { width: 100%; padding: 12px; }
     }
   </style>
 </head>
@@ -126,13 +133,8 @@
   </div>
 
   <div class="main-nav">
-    <a href="#" class="logo-modelo-desktop">
-      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo PC"/>
-    </a>
-
-    <a href="#" class="logo-modelo-mobile">
-      <img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO_MODELO_MOBILE.jpeg" alt="AFP Modelo Mobile"/>
-    </a>
+    <a href="#" class="logo-modelo-desktop"><img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="PC"/></a>
+    <a href="#" class="logo-modelo-mobile"><img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO_MODELO_MOBILE.jpeg" alt="Mobile"/></a>
 
     <div class="main-nav-tabs">
       <a href="#">Afiliados</a>
@@ -163,7 +165,7 @@
 
 <main>
   <h1 class="page-title">Valida certificados de AFP Modelo</h1>
-  <p class="page-desc">Con esta herramienta puedes validar los certificados emitidos por AFP Modelo para usarlos en trámites financieros, como gestiones con entidades públicas o privadas.</p>
+  <p class="page-desc">Con esta herramienta puedes validar los certificados emitidos por AFP Modelo para usarlos en trámites financieros, como gestiones con entidades públicas o privadas, y en trámites personales como acreditar antecedentes para arriendos u otros fines.</p>
   
   <div class="green-alert">Si el certificado es válido, se descargará el archivo automáticamente.</div>
 
@@ -181,16 +183,16 @@
     </div>
   </div>
 
-  <div id="result-box" style="display:none; margin-top:20px;">
-    <div id="result-header" style="padding:15px; font-weight:bold;"></div>
+  <div id="result-box" style="display:none; margin-top:20px; border:1px solid #ddd; border-radius:6px;">
+    <div id="result-header" style="padding:15px; font-weight:bold; border-bottom:1px solid #eee;"></div>
     <div id="result-body" style="padding:15px; background:#fff;"></div>
   </div>
 </main>
 
 <div class="footer-main">
   <div class="footer-inner">
-    <div class="footer-brand"><img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo"/></div>
-    <p class="footer-legal">&copy; 2026 AFP Modelo. Todos los Derechos Reservados.</p>
+    <div class="footer-brand"><img src="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" alt="AFP Modelo" style="height:40px;"/></div>
+    <p class="footer-legal">&copy; 2026 AFP Modelo. Todos los Derechos Reservados. La rentabilidad es variable, por lo que nada garantiza que las rentabilidades pasadas se repitan en el futuro.</p>
   </div>
 </div>
 
