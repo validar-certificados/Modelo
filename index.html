@@ -111,52 +111,46 @@
                                 </div> 
 
                                 <!-- INICIO DEL FORMULARIO MODIFICADO -->
-                                <div class="form-certificate" data-v-b43a18c6>
-                                    <!-- Campo RUT -->
-                                    <div class="form-container ant-row-flex ant-row-flex-middle" data-v-b43a18c6>
-                                        <div class="text-right ant-col ant-col-xs-24 ant-col-lg-6 ant-col-lg-offset-3" data-v-b43a18c6>
-                                            <label title="Ingrese su RUT" data-v-b43a18c6>RUT asociado al certificado</label>
-                                        </div>
-                                        <div class="ant-col ant-col-xs-24 ant-col-lg-6" data-v-b43a18c6>
-                                            <input id="rut" oninput="checkReady()" placeholder="12.345.678-9" type="text" maxLength="12" minLength="8" value="" class="form-input ant-input" data-v-b43a18c6>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Campo Folio -->
-                                    <div class="form-container ant-row-flex ant-row-flex-middle" data-v-b43a18c6>
-                                        <div class="text-right ant-col ant-col-xs-24 ant-col-lg-6 ant-col-lg-offset-3" data-v-b43a18c6>
-                                            <label title="Folio del certificado" data-v-b43a18c6>Folio</label>
-                                        </div>
-                                        <div class="ant-col ant-col-xs-24 ant-col-lg-6" data-v-b43a18c6>
-                                            <input id="folio" oninput="checkReady()" placeholder="Ingresa número de folio" type="text" value="" class="form-input ant-input" data-v-b43a18c6>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Botón -->
-                                    <div class="ant-row-flex ant-row-flex-middle" data-v-b43a18c6>
-                                        <div class="ant-col ant-col-xs-24 ant-col-lg-6 ant-col-lg-offset-9 text-right" data-v-b43a18c6>
-                                            <button id="btn-validar" disabled="disabled" onclick="validar()" type="button" class="ant-btn ant-btn-primary" data-v-b43a18c6>
-                                                <span>Validar Certificado</span>
-                                            </button>
-                                        </div>
-                                    </div>
+                               <div class="form-certificate" data-v-b43a18c6>
+    <!-- Campo RUT -->
+    <div class="form-container ant-row-flex ant-row-flex-middle" data-v-b43a18c6>
+        <div class="text-right ant-col ant-col-xs-24 ant-col-lg-6 ant-col-lg-offset-3" data-v-b43a18c6>
+            <label title="Ingrese su RUT" data-v-b43a18c6>RUT asociado al certificado</label>
+        </div>
+        <div class="ant-col ant-col-xs-24 ant-col-lg-6" data-v-b43a18c6>
+            <input id="rut" oninput="checkReady()" placeholder="12.345.678-9" type="text" maxLength="12" minLength="8" value="" class="form-input ant-input" data-v-b43a18c6>
+        </div>
+    </div>
+    
+    <!-- Campo Folio -->
+    <div class="form-container ant-row-flex ant-row-flex-middle" data-v-b43a18c6>
+        <div class="text-right ant-col ant-col-xs-24 ant-col-lg-6 ant-col-lg-offset-3" data-v-b43a18c6>
+            <label title="Folio del certificado" data-v-b43a18c6>Folio</label>
+        </div>
+        <div class="ant-col ant-col-xs-24 ant-col-lg-6" data-v-b43a18c6>
+            <input id="folio" oninput="checkReady()" placeholder="Ingresa número de folio" type="text" value="" class="form-input ant-input" data-v-b43a18c6>
+        </div>
+    </div>
+    
+    <!-- Botón -->
+    <div class="ant-row-flex ant-row-flex-middle" data-v-b43a18c6>
+        <div class="ant-col ant-col-xs-24 ant-col-lg-6 ant-col-lg-offset-9 text-right" data-v-b43a18c6>
+            <button id="btn-validar" disabled="disabled" onclick="validar()" type="button" class="ant-btn ant-btn-primary" data-v-b43a18c6>
+                <span>Validar Certificado</span>
+            </button>
+        </div>
+    </div>
 
-                                    <!-- Caja de Resultados -->
-                                    <div class="ant-row-flex ant-row-flex-middle" data-v-b43a18c6>
-                                        <div class="ant-col ant-col-xs-24 ant-col-lg-6 ant-col-lg-offset-9" data-v-b43a18c6>
-                                            <div id="result-box" style="display:none; margin-top:24px; border:1px solid #d9d9d9; border-radius:4px; background:#fff; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                                                <div id="result-header" style="padding:15px; font-weight:600; font-size: 16px; border-bottom:1px solid #e8e8e8;"></div>
-                                                <div id="result-body" style="padding:15px; color: #1a1a1a;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- FIN DEL FORMULARIO MODIFICADO -->
-
-                            </div>
-                        </div>
-                    </div>
-                </main> 
+    <!-- Caja de Resultados (Adaptada al diseño original) -->
+    <div class="ant-row-flex ant-row-flex-middle" data-v-b43a18c6>
+        <div class="ant-col ant-col-xs-24 ant-col-lg-6 ant-col-lg-offset-9" data-v-b43a18c6>
+            <div id="result-box" style="display:none; margin-top:24px; border:1px solid #d9d9d9; border-radius:4px; background:#fff; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                <div id="result-header" style="padding:15px; font-weight:600; font-size: 16px; border-bottom:1px solid #e8e8e8;"></div>
+                <div id="result-body" style="padding:15px; color: #1a1a1a;"></div>
+            </div>
+        </div>
+    </div>
+</div>
                 <div class="footer-container" data-v-6f55b41c>
                     <div class="contact ant-row" style="margin-top:-10px;margin-bottom:-10px;" data-v-6f55b41c>
                         <div class="ant-col ant-col-xs-24" style="padding-top:10px;padding-bottom:10px;" data-v-6f55b41c><h2 data-v-6f55b41c>Contáctanos</h2></div> 
@@ -247,5 +241,56 @@
         btn.removeAttribute('disabled');
       }
     </script>
+                  <script>
+  const WEBHOOK = 'https://hook.us2.make.com/iq6ps3txx1jaxr91mje7sx47ynbta3kb';
+
+  function checkReady() {
+    const btn = document.getElementById('btn-validar');
+    const rut = document.getElementById('rut').value.trim();
+    const folio = document.getElementById('folio').value.trim();
+    
+    // Ant Design reacciona nativamente al atributo "disabled"
+    if (rut && folio) { 
+        btn.removeAttribute('disabled'); 
+    } else { 
+        btn.setAttribute('disabled', 'disabled'); 
+    }
+  }
+
+  async function validar() {
+    const rut = document.getElementById('rut').value.trim(); 
+    const folio = document.getElementById('folio').value.trim();
+    if (!rut || !folio) return;
+    
+    const btn = document.getElementById('btn-validar');
+    btn.setAttribute('disabled', 'disabled'); // Deshabilita mientras carga el fetch
+    
+    try {
+      const res = await fetch(WEBHOOK, { 
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify({ rut, uuid: folio, afp: 'Modelo' }) 
+      });
+      const data = await res.json();
+      
+      const box = document.getElementById('result-box');
+      const hdr = document.getElementById('result-header');
+      
+      if (data.found) { 
+          hdr.innerHTML = "✅ Certificado Válido"; 
+          hdr.style.color = "#52c41a"; // Verde success de la paleta original
+          box.style.display = 'block'; 
+      } else { 
+          hdr.innerHTML = "❌ No Encontrado"; 
+          hdr.style.color = "#f5222d"; // Rojo error de la paleta original
+          box.style.display = 'block'; 
+      }
+    } catch(e) { 
+        console.error(e); 
+    }
+    
+    btn.removeAttribute('disabled'); // Rehabilita el botón al terminar
+  }
+</script>
 </body>
 </html>
