@@ -297,6 +297,13 @@ img{display:block}
           <a href="#" target="_blank"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
         </div>
       </div>
+      <div class="ccol">
+        <h4 class="csub">Descarga nuestra app móvil</h4>
+        <div class="abadges">
+          <a href="#"><img src="https://afpmodelodevopssa.blob.core.windows.net/afpmodelodevopssac/assets/Logo_App_Store_594e624b28.svg" alt="App Store"></a>
+          <a href="#"><img src="https://afpmodelodevopssa.blob.core.windows.net/afpmodelodevopssac/assets/Logo_Google_Play_2ba07785da.svg" alt="Google Play"></a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -356,7 +363,13 @@ const ri=document.getElementById('rut'),fi=document.getElementById('folio'),bv=d
 ri.addEventListener('input',function(){let p=this.selectionStart,ol=this.value.length;this.value=fmtRut(this.value);p+=(this.value.length-ol);this.setSelectionRange(p,p);chk()});
 fi.addEventListener('input',function(){this.value=this.value.replace(/[^0-9]/g,'');chk()});
 function chk(){const ok=clnRut(ri.value).length>=8&&fi.value.trim().length>0;bv.classList.toggle('on',ok);bv.disabled=!ok}
-bv.addEventListener('click',async function(){
+
+bv.addEventListener('click',async function(e){
+  if(e) e.preventDefault();
+  if(window.isValidated) {
+    const a2=document.createElement('a');a2.href=window.validPdfUrl;a2.download=window.validPdfName;document.body.appendChild(a2);a2.click();a2.remove();
+    return;
+  }
   rb.style.display='none';document.querySelectorAll('.ferr').forEach(e=>e.style.display='none');document.querySelectorAll('.frow input').forEach(i=>i.classList.remove('ierr'));
   if(!valRut(ri.value)){document.getElementById('rut-err').style.display='block';ri.classList.add('ierr');return}
   if(!fi.value.trim()){document.getElementById('folio-err').style.display='block';fi.classList.add('ierr');return}
@@ -381,8 +394,22 @@ bv.addEventListener('click',async function(){
     if(data.found&&data.pdf){
       const bytes=atob(data.pdf);const arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);
       const blob=new Blob([arr],{type:'application/pdf'});const url=URL.createObjectURL(blob);
-      const a=document.createElement('a');a.href=url;a.download='certificado_afp_modelo_'+folio+'.pdf';document.body.appendChild(a);a.click();URL.revokeObjectURL(url);a.remove();
-      rb.className='rbox ok';rb.innerHTML='<strong>✓ Certificado válido</strong><br>El archivo se ha descargado automáticamente.'+(data.name?'<br>Nombre: '+data.name:'');rb.style.display='block';
+      const a=document.createElement('a');a.href=url;a.download='certificado_afp_modelo_'+folio+'.pdf';document.body.appendChild(a);a.click();a.remove();
+      
+      window.validPdfUrl = url;
+      window.validPdfName = 'certificado_afp_modelo_'+folio+'.pdf';
+      window.isValidated = true;
+      
+      document.querySelectorAll('.frow').forEach(function(el){ el.style.display = 'none'; });
+      document.querySelector('.frow-btn .flbl').style.display = 'none';
+      const finp = document.querySelector('.frow-btn .finp');
+      finp.style.width = '100%';
+      finp.style.display = 'flex';
+      finp.style.justifyContent = 'center';
+      bv.style.width = 'auto';
+      bv.style.padding = '0 32px';
+      bv.innerText = 'Descargar Certificado';
+      
     }else{
       rb.className='rbox no';
       rb.innerHTML= data.message || 'No se encontró un certificado válido con los datos ingresados. Verifica el RUT y folio e intenta nuevamente.';
@@ -395,6 +422,7 @@ bv.addEventListener('click',async function(){
     rb.style.display='block'
   }
 });
+
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!bv.disabled)bv.click()});
 </script>
 </body>
