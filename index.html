@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AFP Modelo - Validar Certificados</title>
+<!-- Favicon con el logo de AFP Modelo -->
+<link rel="icon" href="https://49659256.fs1.hubspotusercontent-na1.net/hubfs/49659256/PDFS/LOGOS%20AFP/LOGO%20MODELO.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -155,7 +157,11 @@ img{display:block}
   .hdr,.subnav,.banner-imp{display:none}
   .hdr-m{display:flex}
   .bc{margin:16px auto;font-size:13px}
-  .ptitle{font-size:24px}
+  
+  /* Ajuste de Tamaño en Logo Móvil y Título */
+  .hdr-m .logo-m img{height:52px;} 
+  .ptitle{font-size:36px;}
+  
   .pdesc{font-size:15px}
   .headband{font-size:14px}
   .frow{flex-direction:column;align-items:stretch}
@@ -178,7 +184,9 @@ img{display:block}
   .chatbot{bottom:16px;right:16px}
   .chat-avatar{width:60px;height:60px}
 }
-@media(max-width:480px){.ptitle{font-size:20px}}
+@media(max-width:480px){
+  .ptitle{font-size:28px;} /* Ajuste final en pantallas muy pequeñas */
+}
 </style>
 </head>
 <body>
@@ -246,7 +254,7 @@ img{display:block}
   <p class="pdesc">Con esta herramienta puedes validar los certificados emitidos por AFP Modelo para usarlos en trámites financieros, como gestiones con entidades públicas o privadas, y en trámites personales como acreditar antecedentes para arriendos u otros fines.</p>
   <div class="headband">Si el certificado es válido, se descargará el archivo automáticamente.</div>
 
-  <div class="fcert">
+  <div class="fcert" id="main-form">
     <div class="frow">
       <label class="flbl" for="rut">RUT asociado al certificado</label>
       <div class="finp">
@@ -269,6 +277,12 @@ img{display:block}
     </div>
     <div class="rbox" id="rbox"></div>
   </div>
+
+  <!-- PANTALLA DE ÉXITO OCULTA INICIALMENTE -->
+  <div id="success-screen" style="display:none; text-align:center; padding: 40px 0;">
+    <button id="btn-download" class="btnv on" style="width: auto; padding: 0 40px; font-size: 16px;">Descargar Certificado</button>
+  </div>
+
 </div>
 
 <!-- LOADING -->
@@ -359,17 +373,17 @@ function tAcc(h){const b=h.nextElementSibling;const o=h.classList.contains('open
 function fmtRut(v){let c=v.replace(/[^0-9kK]/g,'');if(!c)return'';let d=c.slice(-1),b=c.slice(0,-1);if(!b)return c;let f='',n=0;for(let i=b.length-1;i>=0;i--){f=b[i]+f;n++;if(n%3===0&&i>0)f='.'+f}return f+'-'+d}
 function clnRut(r){return r.replace(/[.\-]/g,'').toUpperCase()}
 function valRut(r){const c=clnRut(r);if(c.length<8||c.length>9)return false;const b=c.slice(0,-1),d=c.slice(-1);let s=0,m=2;for(let i=b.length-1;i>=0;i--){s+=parseInt(b[i])*m;m=m===7?2:m+1}let e=11-(s%11);if(e===11)e='0';else if(e===10)e='K';else e=String(e);return d===e}
+
 const ri=document.getElementById('rut'),fi=document.getElementById('folio'),bv=document.getElementById('btnv'),rb=document.getElementById('rbox'),lo=document.getElementById('lov');
+
+// Variable para almacenar los datos de descarga
+window.downloadData = null;
+
 ri.addEventListener('input',function(){let p=this.selectionStart,ol=this.value.length;this.value=fmtRut(this.value);p+=(this.value.length-ol);this.setSelectionRange(p,p);chk()});
 fi.addEventListener('input',function(){this.value=this.value.replace(/[^0-9]/g,'');chk()});
 function chk(){const ok=clnRut(ri.value).length>=8&&fi.value.trim().length>0;bv.classList.toggle('on',ok);bv.disabled=!ok}
 
-bv.addEventListener('click',async function(e){
-  if(e) e.preventDefault();
-  if(window.isValidated) {
-    const a2=document.createElement('a');a2.href=window.validPdfUrl;a2.download=window.validPdfName;document.body.appendChild(a2);a2.click();a2.remove();
-    return;
-  }
+bv.addEventListener('click',async function(){
   rb.style.display='none';document.querySelectorAll('.ferr').forEach(e=>e.style.display='none');document.querySelectorAll('.frow input').forEach(i=>i.classList.remove('ierr'));
   if(!valRut(ri.value)){document.getElementById('rut-err').style.display='block';ri.classList.add('ierr');return}
   if(!fi.value.trim()){document.getElementById('folio-err').style.display='block';fi.classList.add('ierr');return}
@@ -393,23 +407,18 @@ bv.addEventListener('click',async function(e){
     const data=await res.json();lo.classList.remove('show');
     if(data.found&&data.pdf){
       const bytes=atob(data.pdf);const arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);
-      const blob=new Blob([arr],{type:'application/pdf'});const url=URL.createObjectURL(blob);
-      const a=document.createElement('a');a.href=url;a.download='certificado_afp_modelo_'+folio+'.pdf';document.body.appendChild(a);a.click();a.remove();
+      const blob=new Blob([arr],{type:'application/pdf'});
+      const url=URL.createObjectURL(blob);
       
-      window.validPdfUrl = url;
-      window.validPdfName = 'certificado_afp_modelo_'+folio+'.pdf';
-      window.isValidated = true;
+      // En lugar de descargar, guardamos la data y cambiamos la pantalla
+      window.downloadData = {
+          url: url,
+          filename: data.name ? data.name : 'certificado_afp_modelo_'+folio+'.pdf'
+      };
       
-      document.querySelectorAll('.frow').forEach(function(el){ el.style.display = 'none'; });
-      document.querySelector('.frow-btn .flbl').style.display = 'none';
-      const finp = document.querySelector('.frow-btn .finp');
-      finp.style.width = '100%';
-      finp.style.display = 'flex';
-      finp.style.justifyContent = 'center';
-      bv.style.width = 'auto';
-      bv.style.padding = '0 32px';
-      bv.innerText = 'Descargar Certificado';
-      
+      document.getElementById('main-form').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+
     }else{
       rb.className='rbox no';
       rb.innerHTML= data.message || 'No se encontró un certificado válido con los datos ingresados. Verifica el RUT y folio e intenta nuevamente.';
@@ -421,6 +430,18 @@ bv.addEventListener('click',async function(e){
     rb.innerHTML='Error al validar. Intenta nuevamente más tarde.';
     rb.style.display='block'
   }
+});
+
+// Evento para el nuevo botón de descarga
+document.getElementById('btn-download').addEventListener('click', function() {
+    if(window.downloadData) {
+        const a = document.createElement('a');
+        a.href = window.downloadData.url;
+        a.download = window.downloadData.filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    }
 });
 
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!bv.disabled)bv.click()});
