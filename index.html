@@ -372,7 +372,7 @@ const ri=document.getElementById('rut'),fi=document.getElementById('folio'),bv=d
 window.downloadData = null;
 
 ri.addEventListener('input',function(){let p=this.selectionStart,ol=this.value.length;this.value=fmtRut(this.value);p+=(this.value.length-ol);this.setSelectionRange(p,p);chk()});
-fi.addEventListener('input',function(){this.value=this.value.replace(/[^0-9]/g,'');chk()});
+fi.addEventListener('input',function(){fi.addEventListener('input',function(){chk()});chk()});
 function chk(){const ok=clnRut(ri.value).length>=8&&fi.value.trim().length>0;bv.classList.toggle('on',ok);bv.disabled=!ok}
 
 bv.addEventListener('click',async function(){
